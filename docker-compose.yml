@@ -1,0 +1,20 @@
+services:
+  mana-node:
+    build: .
+    image: mana-node:latest
+    container_name: mana-node
+    restart: unless-stopped
+    environment:
+      - MANA_HEALTH_PORT=8080
+      - MANA_PROXY_PORT=8081
+      - MANA_AGENT_PORT=8082
+    ports:
+      - "9080:8080"
+      - "9081:8081"
+      - "9082:8082"
+    networks:
+      - mana-net
+
+networks:
+  mana-net:
+    driver: bridge
